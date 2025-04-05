@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Service MySQL Database
+  mysql_connector_db: # Tên service này được dùng trong code Node.js hoặc biến môi trường DB_HOST
+    image: mysql:8.0
+    container_name: app_mysql_db
+    restart: unless-stopped
+    # Lấy cấu hình từ file .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # Đọc từ .env
+      MYSQL_DATABASE: ${MYSQL_DATABASE}         # Đọc từ .env
+      MYSQL_USER: ${MYSQL_USER}                 # Đọc từ .env
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}       # Đọc từ .env
+    volumes:
+      - mysql_connector_data:/var/lib/mysql
+    networks:
+      - app_net # Kết nối vào mạng chung
+
+  # Service Node.js Application
+  nodejs_connector_app:
+    build: . # Build từ Dockerfile trong thư mục này
+    container_name: app_nodejs_connector
+    restart: unless-stopped
+    ports:
+      # Map cổng 3001 của host vào cổng 3000 của Node.js container
+      - "3001:3000" # Port 3000 được định nghĩa trong app và expose trong Dockerfile
+    # Inject các biến môi trường từ file .env vào container Node.js
+    environment:
+      NODE_ENV: ${NODE_ENV:-production} # Mặc định là production nếu không có trong .env
+      PORT: ${PORT:-3000}
+      # Truyền thông tin kết nối DB vào app qua env vars
+      MYSQL_HOST: ${DB_HOST}           # Lấy từ .env, ví dụ: mysql_connector_db
+      MYSQL_USER: ${DB_USER}           # Lấy từ .env
+      MYSQL_PASSWORD: ${DB_PASSWORD} # Lấy từ .env
+      MYSQL_DATABASE: ${DB_NAME}     # Lấy từ .env
+      MYSQL_PORT: ${DB_PORT:-3307}
+    depends_on:
+      # Đảm bảo MySQL khởi động trước, nhưng vẫn cần logic retry trong Node.js
+      - mysql_connector_db
+    networks:
+      - app_net # Kết nối vào mạng chung
+    # volumes:
+      # Bỏ comment nếu muốn phát triển: mount code và bỏ qua node_modules
+      # - .:/usr/src/app
+      # - /usr/src/app/node_modules
+
+# Định nghĩa networks và volumes
+networks:
+  app_net:
+    driver: bridge
+
+volumes:
+  mysql_connector_data:

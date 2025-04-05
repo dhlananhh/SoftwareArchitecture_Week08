@@ -1,0 +1,11 @@
+# Khởi chạy stack: Build image Node.js và khởi chạy các containers
+    docker compose up -d --build
+
+# Kiểm tra: Xem log của Node.js app để thấy thông báo kết nối DB:
+    docker compose logs nodejs_connector_app -f
+    Bạn nên thấy log "Kết nối thành công tới MySQL database!" và server bắt đầu lắng nghe.
+        Mở trình duyệt và truy cập http://localhost:3001.
+        Bạn sẽ thấy thông báo trạng thái kết nối DB, ví dụ: "Kết nối DB thành công! Test Query Result: 2".
+
+# Clean up:
+    docker compose down -v
