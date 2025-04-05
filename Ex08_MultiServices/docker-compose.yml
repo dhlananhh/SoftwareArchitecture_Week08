@@ -34,7 +34,7 @@ services:
       MYSQL_USER: ${DB_USER}           # Lấy từ .env
       MYSQL_PASSWORD: ${DB_PASSWORD} # Lấy từ .env
       MYSQL_DATABASE: ${DB_NAME}     # Lấy từ .env
-      MYSQL_PORT: ${DB_PORT:-3307}
+      MYSQL_PORT: ${DB_PORT:-3306}
     depends_on:
       # Đảm bảo MySQL khởi động trước, nhưng vẫn cần logic retry trong Node.js
       - mysql_connector_db
