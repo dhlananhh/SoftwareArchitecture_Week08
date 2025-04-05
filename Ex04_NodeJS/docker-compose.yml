@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Tên service cho ứng dụng Node.js
+  nodejs_app:
+    # Chỉ định Docker Compose build image từ Dockerfile trong thư mục hiện tại (.)
+    build: .
+    container_name: my_nodejs_app
+    ports:
+      # Map cổng 3001 của máy host vào cổng 3000 của container (cổng mà app.js đang lắng nghe)
+      - "3001:3000"
+    # Mount thư mục code hiện tại vào container (hữu ích cho development)
+    # Thay đổi code trên máy host sẽ phản ánh ngay trong container mà không cần build lại image
+    # Lưu ý: Bỏ comment dòng này nếu bạn muốn chế độ development.
+    # Nếu không, code sẽ được copy vào image khi build.
+    # volumes:
+    #   - .:/usr/src/app
+    #   # Ngăn không mount node_modules từ host (nếu có) vào container
+    #   # Để container sử dụng node_modules đã được cài đặt bên trong image
+    #   - /usr/src/app/node_modules
+    restart: unless-stopped
