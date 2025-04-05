@@ -1,0 +1,14 @@
+# Launch Docker container:
+    docker compose up -d
+
+# Kết nối vào Redis chạy trên host thông qua cổng đã map
+    redis-cli -p 6379 ping
+
+# Hoặc chạy redis-cli bên trong container
+    docker compose exec redis_cache redis-cli ping
+
+# Clean up:
+    # Nếu không dùng volume, lệnh này là đủ
+        docker compose down
+    # Nếu có dùng volume và muốn xóa cả dữ liệu
+        docker compose down -v

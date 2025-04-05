@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  # Tên service cho Redis
+  redis_cache:
+    image: redis:latest # Sử dụng image Redis mới nhất (hoặc bản cụ thể như redis:7-alpine)
+    container_name: my_redis_instance
+    restart: unless-stopped
+    ports:
+      # Map cổng 6379 của host vào cổng 6379 của container Redis
+      - "6379:6379"
+    # volumes:
+      # Nếu bạn muốn dữ liệu Redis tồn tại sau khi khởi động lại container,
+      # bạn cần sử dụng volume để lưu trữ file dump.rdb hoặc AOF.
+      # - redis_data:/data
+
+# Định nghĩa named volume (nếu bạn sử dụng)
+# volumes:
+#  redis_data:
