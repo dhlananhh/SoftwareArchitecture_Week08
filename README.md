@@ -1,4 +1,4 @@
-# Software Architecture Practice Exercises - Week 6
+# Software Architecture Practice Exercises - Week 8: DOCKER COMPOSE
 
 ## Submission Information
 
