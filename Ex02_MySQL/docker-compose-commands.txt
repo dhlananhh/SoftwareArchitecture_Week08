@@ -1,0 +1,14 @@
+# Khởi chạy container:
+    docker compose up -d
+
+# Kiểm tra:
+    Chờ một chút để MySQL khởi tạo xong (bạn có thể xem log bằng docker compose logs db_mysql).
+    Mở trình duyệt và truy cập http://localhost:8081.
+    Trên giao diện đăng nhập của PHPMyAdmin:
+        Server: db_mysql (thường đã được điền sẵn do biến PMA_HOST)
+        Username: user (user bạn đã tạo)
+        Password: password (mật khẩu bạn đã đặt)
+    Đăng nhập thành công, bạn sẽ thấy database mydatabase đã được tạo. Bạn cũng có thể đăng nhập với user root và mật khẩu rootpassword.
+
+# Clean up: Dừng và xóa container, network VÀ cả volume mysql_data
+    docker compose down -v

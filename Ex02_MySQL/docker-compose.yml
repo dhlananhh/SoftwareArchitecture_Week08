@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  # Service MySQL Database
+  db_mysql:
+    image: mysql:8.0
+    container_name: my_mysql_db_8
+    restart: unless-stopped
+    # Biến môi trường để cấu hình MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # Mật khẩu cho user root
+      MYSQL_DATABASE: mydatabase # Tạo sẵn database tên là mydatabase
+      MYSQL_USER: user # Tạo user mới tên là user
+      MYSQL_PASSWORD: password # Mật khẩu cho user mới
+    ports:
+      # Map cổng 3306 của host vào 3306 của container (tùy chọn, nếu bạn cần kết nối từ bên ngoài)
+      - "3306:3306"
+    volumes:
+      # Sử dụng named volume để lưu trữ dữ liệu MySQL bền vững
+      - mysql_data:/var/lib/mysql
+
+  # Service PHPMyAdmin
+  phpmyadmin:
+    # Sử dụng image phpmyadmin chính thức
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: my_phpmyadmin
+    restart: unless-stopped
+    ports:
+      # Map cổng 8081 của host vào cổng 80 của container PHPMyAdmin
+      - "8081:80"
+    environment:
+      # Chỉ định máy chủ MySQL mà PHPMyAdmin sẽ kết nối đến
+      # 'db_mysql' là tên service của MySQL đã định nghĩa ở trên
+      PMA_HOST: db_mysql
+      PMA_PORT: 3306 # Cổng mặc định của MySQL
+      # Upload Limit (tùy chọn)
+      UPLOAD_LIMIT: 300M
+    # Đảm bảo PHPMyAdmin chỉ khởi động sau khi service 'db_mysql' đã sẵn sàng (optional but good practice)
+    depends_on:
+      - db_mysql
+
+# Định nghĩa named volumes
+volumes:
+  mysql_data:
+    driver: local # Sử dụng driver mặc định (local)
