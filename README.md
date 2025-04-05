@@ -28,3 +28,21 @@
 #### Stop and remove the container:
 
 ![](proof_images/Ex01_Nginx_DockerComposeDown.png)
+
+### Exercise 04: Run Node.js application with Docker Compose
+
+#### Launch Docker container
+
+![](proof_images/Ex04_NodeJS_DockerComposeUp.png)
+
+#### Check Docker container status:
+
+![](proof_images/Ex04_NodeJS_DockerComposePS.png)
+
+#### Test:
+
+![](proof_images/Ex04_NodeJS_Test.png)
+
+#### Stop and remove the container:
+
+![](proof_images/Ex04_NodeJS_DockerComposeDown.png)
