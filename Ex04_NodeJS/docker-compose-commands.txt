@@ -4,10 +4,10 @@
     --build: Buộc Docker Compose phải build lại image trước khi khởi chạy, ngay cả khi image đã tồn tại. Hữu ích khi bạn thay đổi Dockerfile hoặc code được copy vào image.
 
 # Test:
-    Mở trình duyệt và truy cập http://localhost:3001. Bạn sẽ thấy dòng chữ "Xin chào từ ứng dụng Node.js chạy trong Docker!".
+    Mở trình duyệt và truy cập http://localhost:3001. Bạn sẽ thấy dòng chữ "Hello from Node.js application running in Docker!".
 
 # Kiểm tra log: 
-    docker compose logs nodejs_app
+    docker compose logs my_nodejs_app
 
 # Clean up:
     docker compose down
