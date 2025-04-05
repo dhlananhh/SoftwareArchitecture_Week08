@@ -1,0 +1,16 @@
+# Launch container:
+    docker compose up -d
+
+# Test:
+    Mở trình duyệt web và truy cập vào địa chỉ http://localhost:8080. Bạn sẽ thấy trang chào mừng mặc định của Nginx ("Welcome to nginx!").
+    Hoặc sử dụng Curl: curl http://localhost:8080
+
+# Check container status with command:
+    docker compose ps
+or:
+    docker ps
+
+-> Result: You should see the `my_nginx_container` container is running.
+
+# Clean up: Stop and remove the container:
+    docker compose down

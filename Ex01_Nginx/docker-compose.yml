@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  nginx_server:
+    image: nginx:latest
+    container_name: my_nginx_container
+    ports:
+      - "8080:80"
+    restart: unless-stopped
