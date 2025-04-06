@@ -1,7 +1,5 @@
 version: "3.8"
-
 services:
-  # Service Database MySQL
   db:
     image: mysql:5.7
     restart: always
@@ -11,30 +9,21 @@ services:
       MYSQL_PASSWORD: wp_password
       MYSQL_ROOT_PASSWORD: root_password_!
     volumes:
-      # Lưu trữ dữ liệu MySQL
       - db_data:/var/lib/mysql
-
-  # Service WordPress
   wordpress:
     image: wordpress:latest
     restart: always
     ports:
-      # Truy cập WordPress qua cổng 8001 trên máy host
       - "8001:80"
     environment:
-      # Kết nối tới service 'db'
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_NAME: basic_wordpress_db
       WORDPRESS_DB_USER: wp_user
       WORDPRESS_DB_PASSWORD: wp_password
-    # Phụ thuộc vào service 'db'. Docker Compose sẽ khởi động 'db' trước
     depends_on:
       - db
     volumes:
-      # Lưu trữ nội dung WordPress (uploads, themes, plugins)
       - wp_content:/var/www/html
-
-# Khai báo volumes
 volumes:
   db_data:
   wp_content:
