@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  # Service MongoDB Database
+  mongodb:
+    image: mongo:latest
+    container_name: my_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rootadmin
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    volumes:
+      # Lưu trữ dữ liệu MongoDB
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  # Service Mongo Express (Web UI for MongoDB)
+  mongo-express:
+    image: mongo-express:latest
+    container_name: my_mongo_express
+    restart: unless-stopped
+    ports:
+      # Truy cập Mongo Express qua cổng 8082 trên host
+      - "8082:8081" # Cổng mặc định của mongo-express là 8081
+    environment:
+      # Thông tin kết nối tới MongoDB service ('mongodb')
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: 27017
+      # Thông tin xác thực root để Mongo Express kết nối ban đầu (nếu MongoDB yêu cầu)
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_MONGODB_ADMINUSERNAME: rootadmin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: rootpassword
+      # Thông tin đăng nhập vào giao diện web Mongo Express (khác với MongoDB credentials)
+      ME_CONFIG_BASICAUTH_USERNAME: adminuser
+      ME_CONFIG_BASICAUTH_PASSWORD: adminpassword
+    # Đảm bảo MongoDB khởi động trước
+    depends_on:
+      - mongodb
+
+# Khai báo named volume
+volumes:
+  mongo_data:

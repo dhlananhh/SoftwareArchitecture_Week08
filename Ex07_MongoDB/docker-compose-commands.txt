@@ -1,0 +1,13 @@
+Khởi chạy stack:
+    docker compose up -d
+
+Kiểm tra:
+    Chờ MongoDB và Mongo Express khởi động.
+    Mở trình duyệt và truy cập http://localhost:8082.
+    Bạn sẽ thấy yêu cầu đăng nhập Basic Authentication. Sử dụng:
+        Username: adminuser
+        Password: adminpassword
+    Sau khi đăng nhập, bạn sẽ thấy giao diện quản lý MongoDB, liệt kê các database hệ thống (admin, local, config). Bạn có thể tạo database mới, collection, document... thông qua giao diện này.
+
+Clean up:
+    docker compose down -v
