@@ -1,8 +1,8 @@
 const express = require('express');
 
 // Constants
-const PORT = 3000; // Port bên trong container
-const HOST = '0.0.0.0'; // Lắng nghe trên tất cả các network interface
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
 // App
 const app = express();
