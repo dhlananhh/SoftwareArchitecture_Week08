@@ -1,0 +1,14 @@
+Khởi chạy ứng dụng:
+    docker compose up -d --build
+
+Kiểm tra:
+        Mở trình duyệt và truy cập http://localhost:5001
+    hoặc sử dụng curl:
+        curl http://localhost:5001
+    -> Kết quả: Bạn sẽ thấy dòng chữ: "Chào bạn, Flask đây!" cùng với hostname của container.
+
+Kiểm tra logs:
+    docker compose logs flask_app
+
+Clean up:
+    docker compose down

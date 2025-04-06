@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  flask_app:
+    build: .
+    container_name: simple_flask_app
+    ports:
+      - "5001:5000"
+    environment:
+      CUSTOM_MESSAGE: "Hi, Flask here!"
+    restart: unless-stopped
