@@ -1,77 +1,61 @@
 const express = require('express');
-const mysql = require('mysql2/promise'); 
-
-// Constants
-const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
-
-// MySQL Connection Details từ biến môi trường (an toàn hơn)
-// Hoặc bạn có thể hardcode ở đây nếu muốn đơn giản cho ví dụ này
-const dbConfig = {
-	host: process.env.MYSQL_HOST || 'mysql_connector_db', // Tên service MySQL trong Docker Compose
-	user: process.env.MYSQL_USER || 'appuser',
-	password: process.env.MYSQL_PASSWORD || 'apppassword',
-	database: process.env.MYSQL_DATABASE || 'appdb',
-	port: process.env.MYSQL_PORT || 3306,
-	waitForConnections: true,
-	connectionLimit: 10,
-	queueLimit: 0
-};
+const mysql = require('mysql2/promise');
 
 const app = express();
-let dbPool; 
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
-// Hàm khởi tạo kết nối database (async)
-async function initializeDatabase() {
-	try {
-		dbPool = mysql.createPool(dbConfig);
-		// Thử kết nối để kiểm tra
-		const connection = await dbPool.getConnection();
-		console.log('Connected to MySQL database successfully!');
-		connection.release(); 
-		return true;
-	} catch (err) {
-		console.error('DATABASE CONNECTION ERROR:', err.message);
-		// Thử lại sau vài giây nếu kết nối thất bại lúc khởi động
-		console.log('Try reconnecting after 5 seconds...');
-		await new Promise(resolve => setTimeout(resolve, 5000));
-		return initializeDatabase(); 
-	}
+const dbConfig = {
+  host: process.env.MYSQL_HOST || 'db',
+  user: process.env.MYSQL_USER || 'user',
+  password: process.env.MYSQL_PASSWORD || 'password',
+  database: process.env.MYSQL_DATABASE || 'mydb',
+  port: process.env.MYSQL_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+};
+
+let connectionPool;
+
+async function testDbConnection() {
+  try {
+    connectionPool = mysql.createPool(dbConfig);
+    const connection = await connectionPool.getConnection();
+    console.log('✅ Kết nối MySQL thành công!');
+    connection.release();
+    return true;
+  } catch (error) {
+    console.error('❌ Kết nối MySQL thất bại:', error.message);
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    return testDbConnection();
+  }
 }
 
-// Endpoint chính
 app.get('/', async (req, res) => {
-	let dbStatus = 'Unable to connect to DB.';
-	if (dbPool) {
-		try {
-			// Lấy kết nối từ pool và thực hiện một query đơn giản
-			const connection = await dbPool.getConnection();
-			const [rows] = await connection.query('SELECT 1 + 1 AS result');
-			connection.release();
-			dbStatus = `DB connection successful! Test Query Result: ${rows[0].result}`;
-		} catch (err) {
-			dbStatus = `Error when querying DB: ${err.message}`;
-			console.error("Query error:", err);
-		}
-	}
-	res.send(`<h1>Node.js Application</h1><p>Status: ${dbStatus}</p>`);
+  let dbStatus = 'Chưa kiểm tra';
+  try {
+    await connectionPool.query('SELECT 1');
+    dbStatus = 'Kết nối OK';
+  } catch (error) {
+    dbStatus = `Lỗi kết nối: ${error.message}`;
+    console.error('Lỗi khi ping DB:', error);
+    await testDbConnection();
+  }
+  res.send(`
+      <h1>Ứng dụng Node.js</h1>
+      <p>Trạng thái kết nối MySQL: ${dbStatus}</p>
+      <p>Hostname: ${process.env.HOSTNAME || require('os').hostname()}</p>
+  `);
 });
 
-// Khởi động server sau khi đảm bảo có kết nối DB ban đầu
-initializeDatabase().then((connected) => {
-	if (connected) {
-		app.listen(PORT, HOST, () => {
-			console.log(`Node.js application is running on http://${HOST}:${PORT}`);
-			console.log('DB connection information: ');
-			console.log(`   Host: ${dbConfig.host}`);
-			console.log(`   User: ${dbConfig.user}`);
-			console.log(`   Database: ${dbConfig.database}`);
-		});
-	} else {
-		console.error("Unable to start server due to failure to connect to DB after multiple attempts.");
-		process.exit(1); 
-	}
-}).catch(err => {
-	console.error("Unexpected error while initializing DB: ", err);
-	process.exit(1);
-});
+async function startServer() {
+  console.log("Đang kiểm tra kết nối database...");
+  await testDbConnection();
+  app.listen(PORT, HOST, () => {
+    console.log(`🚀 Server Node.js đang chạy trên http://${HOST}:${PORT}`);
+    console.log(`Kết nối tới MySQL host: ${dbConfig.host}`);
+  });
+}
+
+startServer();
