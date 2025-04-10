@@ -1,0 +1,21 @@
+Chạy stack:
+    docker compose up -d
+
+
+Kiểm tra:
+    ■ Prometheus:
+        ● Truy cập http://localhost:9090
+        ● Vào Status -> Targets. Bạn sẽ thấy target prometheus và cadvisor đều UP.
+        ● Click vào endpoint của cadvisor để xem rất nhiều metrics mà nó cung cấp.
+    ■ Grafana:
+        ● Truy cập http://localhost:3000. Đăng nhập (admin / mật khẩu bạn đặt).
+        ● Add Data Source: Thêm Prometheus như Bài 12 (Phần 2), URL là http://prometheus:9090.
+        ● Import Dashboard: Có nhiều dashboard Grafana cho cAdvisor và Docker. Thử tìm các ID sau trên Grafana.com dashboards và import:
+            ➼ 193: Docker and system monitoring (khá phổ biến)
+            ➼ Hoặc tìm kiếm "Docker cAdvisor Prometheus" trên trang dashboards.
+        ● Chọn Prometheus làm data source khi import. Bạn sẽ thấy các panel hiển thị CPU, Memory, Network, Disk I/O của từng container đang chạy (bao gồm cả Prometheus, Grafana, cAdvisor).
+        ● (Tùy chọn) cAdvisor UI: Nếu bạn đã mở port cho cadvisor (ví dụ 8080:8080),
+        bạn có thể truy cập http://localhost:8080 để xem giao diện web riêng của cAdvisor.
+
+Clean up:
+    docker compose down -v
