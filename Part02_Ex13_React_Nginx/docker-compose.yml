@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-react-nginx-app:latest
+    ports:
+      - "8090:80"
+    restart: always

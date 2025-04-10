@@ -1,0 +1,9 @@
+Chạy và build Docker container:
+    docker compose up -d --build
+
+Kiểm tra:
+    Mở trình duyệt và truy cập http://localhost:8090.
+    Bạn sẽ thấy ứng dụng React mặc định chạy.
+
+Clean up:
+    docker compose down
