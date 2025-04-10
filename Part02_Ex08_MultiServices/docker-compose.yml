@@ -1,53 +1,33 @@
 version: "3.8"
+
 services:
-  app:
-    build: .
-    container_name: nodejs_mysql_app
-    restart: unless-stopped
-    ports:
-      - "3001:3000"
-    environment:
-      MYSQL_HOST: db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: mydb
-      MYSQL_PORT: 3306
-    networks:
-      - app_net
-    depends_on:
-      db:
-        condition: service_healthy
-  db:
+  mysqldb:
     image: mysql:8.0
-    container_name: nodejs_mysql_db
     restart: unless-stopped
+    env_file: ./.env
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - app_net
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "localhost",
-          "-u",
-          "${MYSQL_USER}",
-          "-p${MYSQL_PASSWORD}",
-        ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-networks:
-  app_net:
-    driver: bridge
+      - db:/var/lib/mysql
+  app:
+    depends_on:
+      - mysqldb
+    build: ./nodejs-app
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+    stdin_open: true
+    tty: true
+
 volumes:
-  db_data:
+  db:
