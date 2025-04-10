@@ -1,33 +1,20 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  db_mysql:
+  db:
     image: mysql:8.0
-    container_name: my_mysql_db_8
-    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
+      MYSQL_ROOT_PASSWORD: your_strong_root_password
+      MYSQL_DATABASE: mydb
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: my_phpmyadmin
-    restart: unless-stopped
+    image: phpmyadmin:latest
     ports:
-      - "8081:80"
+      - "8081:80"      
     environment:
-      PMA_HOST: db_mysql
-      PMA_PORT: 3306
-      UPLOAD_LIMIT: 300M
-    depends_on:
-      - db_mysql
-
-volumes:
-  mysql_data:
-    driver: local
+      PMA_HOST: db      
+      PMA_PORT: 3306    
+    depends_on:        
+      - db
