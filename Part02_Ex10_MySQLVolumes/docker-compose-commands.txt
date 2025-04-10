@@ -1,0 +1,14 @@
+Chạy container:
+    docker compose up -d
+
+Kiểm tra:
+    - Kết nối vào MySQL (ví dụ qua cổng 3307) và tạo một bảng, thêm vài dòng dữ liệu. 
+    Mở file init.sql để xem thêm
+    - Dừng container: (LƯU Ý: KHÔNG dùng -v)
+        docker compose down 
+    - Khởi động lại container: 
+        docker compose up -d
+    - Kết nối lại vào MySQL và kiểm tra xem bảng test_table và dữ liệu còn tồn tại không. 
+    Nếu còn -> volume hoạt động đúng.
+Dọn dẹp: Để xóa container VÀ named volume mysql_data:
+    docker compose down -v
