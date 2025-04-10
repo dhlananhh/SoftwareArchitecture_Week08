@@ -1,0 +1,9 @@
+Chạy stack:
+    docker compose up -d --build
+
+Kiểm tra:
+    - Mở trình duyệt truy cập http://localhost:8080.
+    - Nhấn refresh liên tục (F5 hoặc Ctrl/Cmd+R). Bạn sẽ thấy hostname trong thông báo trả về thay đổi giữa hai container Flask (bt3_flask_1 và bt3_flask_2, hoặc các tên ID ngẫu nhiên nếu không đặt container_name), chứng tỏ Nginx đang thực hiện cân bằng tải round-robin.
+
+Clean up:
+    docker compose down
