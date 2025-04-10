@@ -1,0 +1,62 @@
+# ~/docker-compose-part3-exercises/bt1-wordpress-mysql-final/docker-compose.yml
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: bt1_mysql_db # Đặt tên container cụ thể (tùy chọn)
+    volumes:
+      - db_data:/var/lib/mysql # Named volume cho data MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: example_root_password # Luôn dùng mật khẩu mạnh!
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: example_wp_password # Luôn dùng mật khẩu mạnh!
+    networks: # Kết nối service này vào mạng custom_wp_network
+      - custom_wp_network
+    restart: always
+    # Healthcheck để WordPress biết khi nào DB sẵn sàng
+    healthcheck:
+      test: [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-p$${MYSQL_ROOT_PASSWORD}",
+        ] # Sử dụng $$ để escape biến môi trường
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  wordpress:
+    image: wordpress:latest
+    container_name: bt1_wordpress_app # Đặt tên container cụ thể (tùy chọn)
+    ports:
+      - "8080:80" # Map cổng 8080 host -> 80 container WP
+    environment:
+      WORDPRESS_DB_HOST: db:3306 # Kết nối tới service 'db' qua tên service trên mạng nội bộ
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: example_wp_password # Phải khớp với mật khẩu đã đặt cho MySQL
+      WORDPRESS_DB_NAME: wordpress_db
+    depends_on: # Đảm bảo WordPress khởi động sau DB
+      db:
+        condition: service_healthy # Chờ cho đến khi healthcheck của 'db' thành công
+    volumes:
+      - wp_files:/var/www/html # Named volume cho files WordPress
+    networks: # Kết nối service này vào mạng custom_wp_network
+      - custom_wp_network
+    restart: always
+
+# Khai báo named volumes
+volumes:
+  db_data:
+  wp_files:
+
+# Khai báo mạng tùy chỉnh
+networks:
+  custom_wp_network:
+    driver: bridge # Sử dụng driver mặc định
+    name: wp_private_net # Đặt tên cụ thể cho network trên host (tùy chọn)

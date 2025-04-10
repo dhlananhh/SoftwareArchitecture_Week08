@@ -1,0 +1,13 @@
+Chạy stack:
+    docker compose up -d
+
+Kiểm tra:
+    ◾ Mở trình duyệt truy cập http://localhost:8080.
+    ◾ Tiến hành cài đặt WordPress. Dữ liệu database sẽ lưu trong volume db_data, dữ liệu file WordPress sẽ lưu trong wp_files.
+    ◾ Kiểm tra network được tạo:
+        docker network ls | grep wp_private_net.
+    ◾ Bạn có thể thử docker compose down (không -v) rồi docker compose up -d lại,
+    trang WordPress và dữ liệu vẫn sẽ còn nguyên.
+
+Clean up (xóa cả volumes và network):
+    docker compose down -v
