@@ -1,0 +1,11 @@
+Chạy container:
+    docker compose up -d
+    Lưu ý: Lệnh docker compose up sẽ áp dụng các giới hạn này khi tạo container. Nếu Docker engine của bạn không hỗ trợ hoặc cấu hình không đúng, bạn có thể thấy cảnh báo.
+
+Kiểm tra:
+    Sử dụng lệnh docker stats để xem việc sử dụng tài nguyên của các container đang chạy:
+        docker stats
+    Tìm container Redis (tên thường là bai15-resource-limits-redis-1 hoặc tương tự). Bạn sẽ thấy cột CPU % và MEM USAGE / LIMIT. Cột LIMIT của Memory sẽ hiển thị 128MiB. Giới hạn CPU khó thấy trực tiếp ở đây, nhưng Docker sẽ áp đặt giới hạn đó.
+
+Clean up:
+    docker compose down
