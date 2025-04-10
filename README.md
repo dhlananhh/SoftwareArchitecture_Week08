@@ -29,6 +29,26 @@
 
 ![](proof_images/Ex01_Nginx_DockerComposeDown.png)
 
+### Exercise 01: Run a simple container with Docker Compose
+
+#### Launch Docker container
+
+![](proof_images/Ex01_Nginx_DockerComposeUp.png)
+
+#### Check Docker container status:
+
+![](proof_images/Ex01_Nginx_DockerComposePS.png)
+
+#### Test:
+
+![](proof_images/Ex01_Nginx_Test_1.png)
+
+![](proof_images/Ex01_Nginx_Test_2.png)
+
+#### Stop and remove the container:
+
+![](proof_images/Ex01_Nginx_DockerComposeDown.png)
+
 ### Exercise 04: Run Node.js application with Docker Compose
 
 #### Launch Docker container
