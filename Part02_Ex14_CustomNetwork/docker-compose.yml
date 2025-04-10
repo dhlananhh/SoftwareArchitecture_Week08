@@ -1,0 +1,17 @@
+version: "3.8"
+networks:
+  my_private_network:
+    driver: bridge
+services:
+  service1:
+    image: alpine:latest
+    command: sh -c "apk update && apk add curl && sleep 3600"
+    networks:
+      - my_private_network
+    container_name: service1_container
+  service2:
+    image: alpine:latest
+    command: sh -c "apk update && apk add curl && sleep 3600"
+    networks:
+      - my_private_network
+    container_name: service2_container

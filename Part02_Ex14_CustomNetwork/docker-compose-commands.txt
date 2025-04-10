@@ -1,0 +1,28 @@
+Chạy các container:
+    docker compose up -d
+
+
+Kiểm tra:
+    ■ Mở một terminal và truy cập vào shell của service1:
+        docker compose exec service1 sh
+
+    ■ Bên trong shell của service1, thử ping service2:
+        # Bên trong container service1
+        ping -c 3 service2
+    Bạn sẽ thấy các gói tin được gửi và nhận thành công.
+
+    ■ Thử curl (nếu service2 chạy một web server, ở đây không có nên sẽ lỗi connection refused, nhưng tên service2 sẽ được phân giải thành IP):
+        # Bên trong container service1
+        curl http://service2
+    (Sẽ báo lỗi không kết nối được vì service2 không chạy webserver, nhưng hostname resolution thành công)
+
+    ■ Gõ exit để thoát khỏi shell của service1.
+
+    ■ Làm tương tự, truy cập vào service2 và thử ping service1:
+        docker compose exec service2 sh
+        ping -c 3 service1
+        exit
+
+
+Clean up:
+    docker compose down
