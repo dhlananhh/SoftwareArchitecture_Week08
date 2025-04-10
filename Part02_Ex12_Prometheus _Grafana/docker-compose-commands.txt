@@ -1,0 +1,19 @@
+Chạy stack:
+    docker compose up -d
+
+Kiểm tra:
+    - Prometheus: Mở http://localhost:9090.
+    Vào Status -> Targets. Bạn sẽ thấy cả prometheus và node_exporter đang ở trạng thái UP
+    - Grafana: Mở http://localhost:3001.
+    Đăng nhập với user admin và password bạn đã đặt (password: admin).
+        ■ Add Data Source: Đi đến Configuration (icon bánh răng) -> Data Sources -> Add data source. Chọn Prometheus.
+            ● HTTP URL: http://prometheus:9090 (dùng tên service prometheus vì Grafana và Prometheus cùng network Docker).
+            ● Nhấn "Save & Test". Nếu thành công, bạn sẽ thấy "Data source is working".
+        ■ Import Dashboard: Grafana Labs cung cấp nhiều dashboard sẵn. Ví dụ, để import dashboard cho Node Exporter:
+            ● Đi đến Dashboards (icon 4 ô vuông) -> Import.
+            ● Trong ô "Import via grafana.com", nhập ID 1860 (Node Exporter Full dashboard) và nhấn Load.
+            ● Ở bước tiếp theo, chọn data source Prometheus bạn vừa tạo.
+            ● Nhấn Import. Bạn sẽ thấy dashboard hiển thị metrics của máy host.
+
+Clean up:
+    docker compose down -v
