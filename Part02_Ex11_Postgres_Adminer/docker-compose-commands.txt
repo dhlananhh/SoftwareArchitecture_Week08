@@ -1,0 +1,15 @@
+Chạy stack:
+    docker compose up -d
+
+Kiểm tra:
+    Mở trình duyệt và truy cập http://localhost:8083.
+    Trên giao diện Adminer:
+        System: PostgreSQL
+        Server: postgres (tên service của Postgres trong docker-compose)
+        Username: user
+        Password: password
+        Database: mydb
+    Nhấn Login. Bạn sẽ có thể quản lý database mydb
+
+Clean up:
+    docker compose down -v
