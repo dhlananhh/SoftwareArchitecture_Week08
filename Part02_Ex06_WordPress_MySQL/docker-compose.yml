@@ -1,29 +1,32 @@
-version: "3.8"
+version: '3.8'
+
 services:
   db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: basic_wordpress_db
-      MYSQL_USER: wp_user
-      MYSQL_PASSWORD: wp_password
-      MYSQL_ROOT_PASSWORD: root_password_!
+    image: mysql:5.7 
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql 
+    environment:
+      MYSQL_ROOT_PASSWORD: your_strong_root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: wordpress_password
+    restart: always 
+
   wordpress:
     image: wordpress:latest
-    restart: always
-    ports:
-      - "8001:80"
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_NAME: basic_wordpress_db
-      WORDPRESS_DB_USER: wp_user
-      WORDPRESS_DB_PASSWORD: wp_password
-    depends_on:
-      - db
     volumes:
-      - wp_content:/var/www/html
-volumes:
+      - wp_files:/var/www/html 
+    ports:
+      - "8000:80"  
+    environment:
+      WORDPRESS_DB_HOST: db:3306 
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - db         
+    restart: always
+
+volumes: 
   db_data:
-  wp_content:
+  wp_files:
