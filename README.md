@@ -29,26 +29,6 @@
 
 ![](proof_images/Ex01_Nginx_DockerComposeDown.png)
 
-### Exercise 01: Run a simple container with Docker Compose
-
-#### Launch Docker container
-
-![](proof_images/Ex01_Nginx_DockerComposeUp.png)
-
-#### Check Docker container status:
-
-![](proof_images/Ex01_Nginx_DockerComposePS.png)
-
-#### Test:
-
-![](proof_images/Ex01_Nginx_Test_1.png)
-
-![](proof_images/Ex01_Nginx_Test_2.png)
-
-#### Stop and remove the container:
-
-![](proof_images/Ex01_Nginx_DockerComposeDown.png)
-
 ### Exercise 04: Run Node.js application with Docker Compose
 
 #### Launch Docker container
@@ -84,3 +64,23 @@
 #### Stop and remove the container:
 
 ![](proof_images/Ex05_Redis_DockerComposeDown.png)
+
+### Exercise 08: Run a simple container with Docker Compose
+
+#### Launch Docker container
+
+![](proof_images/Ex08_MultiServices_DockerComposeUp.png)
+
+#### Check Docker container status:
+
+![](proof_images/Ex08_MultiServices_DockerComposePS.png)
+
+#### Test:
+
+![](proof_images/Ex08_MultiServices_Test_1.png)
+
+![](proof_images/Ex08_MultiServices_Test_2.png)
+
+#### Stop and remove the container:
+
+![](proof_images/Ex08_MultiServices_DockerComposeDown.png)
