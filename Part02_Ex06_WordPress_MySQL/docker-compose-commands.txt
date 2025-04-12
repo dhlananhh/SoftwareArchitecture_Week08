@@ -3,7 +3,7 @@ Khởi chạy stack:
 
 Kiểm tra:
     Đợi một chút để các container khởi động.
-    Mở trình duyệt và truy cập http://localhost:8001.
+    Mở trình duyệt và truy cập http://localhost:8000.
     Bạn sẽ thấy màn hình cài đặt WordPress. Tiến hành cài đặt.
     Dữ liệu database và các file WordPress sẽ được lưu trong các volume db_data và wp_content
 
