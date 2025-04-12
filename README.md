@@ -33,7 +33,7 @@
 
 #### Launch Docker container
 
-![](proof_images/Ex04_NodeJS_DockerComposeUp.png)
+![](proof_images/Ex04_NodeJS_DockerComposeUpBuild.png)
 
 #### Check Docker container status:
 
