@@ -29,7 +29,7 @@
 
 ![](proof_images/Part02_Ex01_Nginx_DockerComposeDown.png)
 
-### Exercise 04: Run Node.js application with Docker Compose
+### Exercise 04: Run a simple Node.js app with Express using Docker Compose.
 
 #### Launch Docker container
 
@@ -65,7 +65,39 @@
 
 ![](proof_images/Part02_Ex05_Redis_DockerComposeDown.png)
 
-### Exercise 08: Run a simple container with Docker Compose
+### Exercise 06: Run WordPress with MySQL using Docker Compose.
+
+#### Launch Docker container
+
+![](proof_images/Part02_Ex06_Wordpress_MySQL_DockerComposeUp_1.png)
+
+![](proof_images/Part02_Ex06_Wordpress_MySQL_DockerComposeUp_2.png)
+
+#### Check Docker container status:
+
+![](proof_images/Part02_Ex06_Wordpress_MySQL_DockerComposePS.png)
+
+#### Test:
+
+![](proof_images/Part02_Ex08_MultiServices_Test_1.png)
+
+![](proof_images/Part02_Ex08_MultiServices_Test_2.png)
+
+![](proof_images/Part02_Ex08_MultiServices_Test_3.png)
+
+![](proof_images/Part02_Ex08_MultiServices_Test_4.png)
+
+![](proof_images/Part02_Ex08_MultiServices_Test_5.png)
+
+![](proof_images/Part02_Ex08_MultiServices_Test_6.png)
+
+![](proof_images/Part02_Ex08_MultiServices_Test_7.png)
+
+#### Stop and remove the container:
+
+![](proof_images/Part02_Ex08_MultiServices_DockerComposeDown.png)
+
+### Exercise 08: Connect multiple services with Docker Compose
 
 #### Launch Docker container
 
