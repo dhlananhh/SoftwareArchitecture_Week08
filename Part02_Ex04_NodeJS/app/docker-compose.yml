@@ -1,8 +1,7 @@
 version: "3.8"
 services:
-  nodejs_app:
+  app:
     build: .
     container_name: my_nodejs_app
     ports:
-      - "3001:3000"
-    restart: unless-stopped
+      - "4000:3000"
