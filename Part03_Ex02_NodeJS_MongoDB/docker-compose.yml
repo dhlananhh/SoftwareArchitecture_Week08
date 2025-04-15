@@ -13,16 +13,11 @@ services:
     volumes:
       - db:/data/db
     healthcheck:
-      test: [
-        "CMD",
-        "mongosh",
-        "--eval",
-        "db.adminCommand('ping')"
-      ]
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
       timeout: 5s
       retries: 5
-      - db:/data/db
+        - db:/data/db
   app:
     depends_on:
       - mongodb
