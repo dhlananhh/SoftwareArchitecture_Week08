@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mongodb:
-    image: mongo:5.0.2
+    image: mongo:latest
     restart: unless-stopped
     env_file: ./.env
     environment:
@@ -11,6 +11,17 @@ services:
     ports:
       - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
     volumes:
+      - db:/data/db
+    healthcheck:
+      test: [
+        "CMD",
+        "mongosh",
+        "--eval",
+        "db.adminCommand('ping')"
+      ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
       - db:/data/db
   app:
     depends_on:

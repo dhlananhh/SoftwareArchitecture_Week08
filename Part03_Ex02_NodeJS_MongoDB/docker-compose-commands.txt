@@ -1,0 +1,11 @@
+# Build and run the containers
+docker compose up -d
+
+# Stop the containers
+docker compose down
+
+#Check the logs
+docker compose logs -f
+
+# Rebuild and run the container
+docker compose up -d --build
