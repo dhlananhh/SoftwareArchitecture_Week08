@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  vote:
+    build: ./vote
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+    networks:
+      - voting-network
+
+  result:
+    build: ./result
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
+    networks:
+      - voting-network
+
+  redis:
+    image: redis:alpine
+    networks:
+      - voting-network
+
+  worker:
+    build: ./worker
+    depends_on:
+      - redis
+      - db
+    networks:
+      - voting-network
+
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - voting-network
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+networks:
+  voting-network:
+    driver: bridge
+
+volumes:
+  db-data:

@@ -1,0 +1,10 @@
+Khởi tạo Docker Container:
+  docker compose up -d --build
+
+Kiểm tra:
+  - Truy cập http://localhost:5000 để vote (có thể dùng Postman để test).
+  - Truy cập http://localhost:5001/results để xem kết quả.
+  - Kiểm tra log của từng service bằng docker compose logs <service-name>
+
+Clean up: Chạy docker compose down -v để dừng và xóa tất cả các container, network và volumes liên quan.
+  docker compose down -v
