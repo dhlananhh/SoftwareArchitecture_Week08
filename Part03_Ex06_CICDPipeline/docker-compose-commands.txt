@@ -1,0 +1,23 @@
+1. Development Mode:
+  - Chạy docker compose -f docker-compose-dev.yml up -d --build trong thư mục Part03_Ex06_CICDPipeline.
+  - Truy cập http://localhost:5000 để kiểm tra app.
+  - Sửa đổi code trong file app.py và kiểm tra xem app đã thay đổi chưa.
+  - Kiểm tra log của tests bằng `docker compose -f docker-compose-dev.yml logs tests`
+    docker compose -f docker-compose-dev.yml logs tests
+
+
+2. Production Mode:
+  - Build image cho app:
+    docker compose -f docker-compose-dev.yml build app
+    docker tag <image_id_of_app> app-image:latest
+
+  *   Chạy `docker compose -f docker-compose-prod.yml up -d --build` trong thư mục `Part03_Ex06_CICDPipeline`.
+  *   Truy cập `http://localhost` để kiểm tra app.
+  *   Kiểm tra log của nginx và app bằng `docker compose -f docker-compose-prod.yml logs <service-name>`.
+
+
+3. Clean Up
+  - Development Mode: Chạy `docker compose -f docker-compose-dev.yml down -v`
+    docker compose -f docker-compose-dev.yml down -v
+  - Production Mode: Chạy `docker compose -f docker-compose-prod.yml down -v`
+    docker compose -f docker-compose-prod.yml down -v
