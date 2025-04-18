@@ -9,9 +9,16 @@ services:
     networks:
       - my_private_network
     container_name: service1_container
+    restart: always
   service2:
     image: alpine:latest
     command: sh -c "apk update && apk add curl && sleep 3600"
     networks:
       - my_private_network
     container_name: service2_container
+    restart: always
+  service3:
+    image: alpine:latest
+    command: sh -c "apk update && apk add curl && sleep 3600"
+    container_name: service3_container
+    restart: always
