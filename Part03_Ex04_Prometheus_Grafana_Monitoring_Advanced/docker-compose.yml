@@ -29,7 +29,7 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
-    container_name: part03_ex04_grafana
+    container_name: part03_ex04_cadvisor
     ports:
       - "8080:8080"
     volumes:

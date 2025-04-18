@@ -17,7 +17,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-        - db:/data/db
   app:
     depends_on:
       - mongodb
@@ -34,6 +33,5 @@ services:
       - DB_PORT=$MONGODB_DOCKER_PORT
     stdin_open: true
     tty: true
-
 volumes:
   db:
