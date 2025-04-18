@@ -79,19 +79,19 @@
 
 #### Test:
 
-![](proof_images/Part02_Ex08_MultiServices_Test_1.png)
+![](proof_images/Part02_Ex06_Wordpress_MySQL_Test_1.png)
 
-![](proof_images/Part02_Ex08_MultiServices_Test_2.png)
+![](proof_images/Part02_Ex06_Wordpress_MySQL_Test_2.png)
 
-![](proof_images/Part02_Ex08_MultiServices_Test_3.png)
+![](proof_images/Part02_Ex06_Wordpress_MySQL_Test_3.png)
 
-![](proof_images/Part02_Ex08_MultiServices_Test_4.png)
+![](proof_images/Part02_Ex06_Wordpress_MySQL_Test_4.png)
 
-![](proof_images/Part02_Ex08_MultiServices_Test_5.png)
+![](proof_images/Part02_Ex06_Wordpress_MySQL_Test_5.png)
 
-![](proof_images/Part02_Ex08_MultiServices_Test_6.png)
+![](proof_images/Part02_Ex06_Wordpress_MySQL_Test_6.png)
 
-![](proof_images/Part02_Ex08_MultiServices_Test_7.png)
+![](proof_images/Part02_Ex06_Wordpress_MySQL_Test_7.png)
 
 #### Stop and remove the container:
 
