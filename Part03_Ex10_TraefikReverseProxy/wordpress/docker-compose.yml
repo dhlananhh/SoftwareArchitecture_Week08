@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  wordpress:
+    image: wordpress:latest
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+    depends_on:
+      - db
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.wordpress.rule=Host(`wordpress.localhost`)
+      - traefik.http.routers.wordpress.entrypoints=web
+    networks:
+      - web
+  db:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=wordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    networks:
+      - web
+networks:
+  web:
+    external: true

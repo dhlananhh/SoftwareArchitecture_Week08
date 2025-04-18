@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command: --configFile=/etc/traefik/traefik.yml
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge

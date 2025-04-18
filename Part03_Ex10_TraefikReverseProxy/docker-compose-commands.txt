@@ -1,0 +1,11 @@
+1. Chạy docker compose up -d trong thư mục Part03_Ex10_TraefikReverseProxy.
+  docker compose up -d
+2. Chạy docker compose -f wordpress/docker-compose.yml up -d
+  docker compose -f wordpress/docker-compose.yml up -d
+3. Truy cập http://wordpress.localhost để kiểm tra WordPress
+  (bạn cần thêm wordpress.localhost vào file /etc/hosts với ip 127.0.0.1).
+4. Truy cập http://localhost:8080 để kiểm tra Traefik dashboard.
+5. Kiểm tra log của từng service bằng docker compose logs <service-name>
+6. Clean Up:
+  - Chạy docker compose -f wordpress/docker-compose.yml down -v
+  - Chạy docker compose down -v trong thư mục Part03_Ex10_TraefikReverseProxy
