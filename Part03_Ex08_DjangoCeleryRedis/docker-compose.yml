@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  app:
+    build: ./django_app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./django_app:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    networks:
+      - django-celery-network
+
+  celery:
+    build: ./django_app
+    command: celery -A django_project worker -l info
+    volumes:
+      - ./django_app:/app
+    depends_on:
+      - redis
+      - app
+    networks:
+      - django-celery-network
+
+  redis:
+    image: redis:alpine
+    networks:
+      - django-celery-network
+
+networks:
+  django-celery-network:
+    driver: bridge

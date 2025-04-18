@@ -1,0 +1,22 @@
+1. Chạy docker compose up -d --build trong thư mục Part03_Ex08_DjangoCeleryRedis.
+  docker compose up -d --build
+2. Truy cập http://localhost:8000 để kiểm tra Django app.
+3. Kiểm tra log của celery để xem task đã được chạy hay chưa. Dùng lệnh `docker compose logs celery`.
+  docker compose logs celery
+4. Kiểm tra log của app bằng `docker compose logs app`.
+  docker compose logs app
+5. Clean Up: Chạy `docker compose down -v` để dừng và xóa tất cả các container, network và volumes liên quan.
+  docker compose down -v
+
+
+// ============================================================================================================================
+
+NOTES:
+  - Tạo các file __init__.py ở trong thư mục app và django_project
+  - Tạo file manage.py ở trong thư mục django_app
+  - Sau khi tạo tất cả các file và thư mục ở trên, bạn hãy chạy lệnh sau trong thư mục django_app:
+    django-admin startproject django_project .
+  - Chạy lệnh này để tạo database:
+    python manage.py migrate
+  - Chạy lệnh này để tạo superuser:
+    python manage.py createsuperuser
