@@ -7,5 +7,20 @@
 # Check the logs
   docker compose logs -f
 
+# Check the logs to check db connection status
+  docker compose logs -f | grep 'connected to mongodb'
+
+# Check the container is running
+  Mở trình duyệt và truy cập http://localhost:3002
+  curl http://localhost:3002
+
+# Check volume by stopping and starting again and check log
+  docker compose down
+  docker compose up -d
+  docker compose logs -f | grep 'connected to mongodb'
+
 # Rebuild and run the container
   docker compose up -d --build
+
+# Clean up containers and volumes
+  docker compose down -v

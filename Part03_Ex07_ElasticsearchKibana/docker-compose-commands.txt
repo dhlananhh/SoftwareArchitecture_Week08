@@ -5,7 +5,9 @@
 3. Đăng nhập:
   username: elastic
   password: changeme
-4. Kiểm tra log của từng service bằng lệnh:
-  docker compose logs <service-name>.
+4. Kiểm tra log:
+  - Kiểm tra log của Kibana để xem Kibana đã kết nối với Elasticsearch chưa:
+    docker compose logs -f kibana | grep 'Elasticsearch connection'
+  - (Tùy chọn) Kiểm tra log của từng service bằng lệnh: docker compose logs <service-name>.
 5. Clean Up: Chạy `docker compose down -v` để dừng và xóa tất cả các container, network và volumes liên quan.
   docker compose down -v

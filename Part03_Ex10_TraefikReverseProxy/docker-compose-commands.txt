@@ -5,7 +5,9 @@
 3. Truy cập http://wordpress.localhost để kiểm tra WordPress
   (bạn cần thêm wordpress.localhost vào file /etc/hosts với ip 127.0.0.1).
 4. Truy cập http://localhost:8080 để kiểm tra Traefik dashboard.
-5. Kiểm tra log của từng service bằng docker compose logs <service-name>
+5. Kiểm tra log:
+  - Kiểm tra log của Traefik để xem Traefik đã route request đến Wordpress thành công hay chưa:
+    docker compose logs -f traefik | grep 'wordpress.localhost'
 6. Clean Up:
   - Chạy docker compose -f wordpress/docker-compose.yml down -v
   - Chạy docker compose down -v trong thư mục Part03_Ex10_TraefikReverseProxy

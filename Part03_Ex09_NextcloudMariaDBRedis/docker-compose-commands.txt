@@ -2,6 +2,10 @@
   docker compose up -d
 2. Truy cập http://localhost để kiểm tra Nextcloud.
 3. Bạn cần phải set up nextcloud lần đầu
-4. Kiểm tra log của từng service bằng `docker compose logs <service-name>`.
+4. Kiểm tra log:
+  - Kiểm tra log của Nextcloud để xem Nextcloud đã kết nối với MariaDB và Redis chưa:
+    docker compose logs -f nextcloud | grep 'Redis is configured'
+    docker compose logs -f nextcloud | grep 'MariaDB connection is established'
+  - (Tùy chọn) Kiểm tra log của từng service bằng `docker compose logs <service-name>`.
 5. Clean Up: Chạy `docker compose down -v` để dừng và xóa tất cả các container, network và volumes liên quan.
   docker compose down -v

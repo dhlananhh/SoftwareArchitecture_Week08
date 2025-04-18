@@ -4,7 +4,11 @@ Khởi tạo Docker Container:
 Kiểm tra:
   - Truy cập http://localhost:5000 để vote (có thể dùng Postman để test).
   - Truy cập http://localhost:5001/results để xem kết quả.
-  - Kiểm tra log của từng service bằng docker compose logs <service-name>
+  - Kiểm tra log của worker để xem worker có hoạt động không: docker compose logs -f worker | grep 'process vote'
+  - Kiểm tra log của postgres để xem có kết nối thành công không: docker compose logs -f postgres | grep 'connection established'
+  - (Tùy chọn) Kiểm tra log của từng service bằng docker compose logs <service-name>
+  - (Tùy chọn) Kiểm tra dữ liệu trong Postgres sau khi vote (ví dụ dùng psql hoặc một công cụ quản lý DB khác)
+  
 
 Clean up: Chạy docker compose down -v để dừng và xóa tất cả các container, network và volumes liên quan.
   docker compose down -v
