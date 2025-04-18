@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  nextcloud:
+    image: nextcloud:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - REDIS_HOST=redis
+    volumes:
+      - nextcloud-data:/var/www/html
+    networks:
+      - nextcloud-network
+
+  db:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - nextcloud-network
+
+  redis:
+    image: redis:alpine
+    networks:
+      - nextcloud-network
+
+volumes:
+  nextcloud-data:
+  db-data:
+
+networks:
+  nextcloud-network:
+    driver: bridge
