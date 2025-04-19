@@ -1,7 +1,8 @@
+yml
 version: "3.8"
 services:
   app:
-    build: .
+    build: ./app
     container_name: my_nodejs_app
     ports:
       - "4000:3000"
