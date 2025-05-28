@@ -116,3 +116,39 @@
 #### Stop and remove the container:
 
 ![](proof_images/Part02_Ex08_MultiServices_DockerComposeDown.png)
+
+### Exercise 09: Running Python Flask Applications with Docker Compose
+
+#### Launch Docker container
+
+![](proof_images/Part02_Ex09_PythonFlask_DockerComposeUp_1.png)
+
+![](proof_images/Part02_Ex09_PythonFlask_DockerComposeUp_2.png)
+
+#### Test:
+
+![](proof_images/Part02_Ex09_PythonFlask_Test.png)
+
+#### Stop and remove the container:
+
+![](proof_images/Part02_Ex09_PythonFlask_DockerComposeDown.png)
+
+### Exercise 10: Store data with Docker Volumes
+
+#### Launch Docker container
+
+![](proof_images/Part02_Ex10_MySQLVolumes_DockerComposeUp.png)
+
+#### Test:
+
+![](proof_images/Part02_Ex10_MySQLVolumes_Test_CreateDatabase.png)
+
+![](proof_images/Part02_Ex10_MySQLVolumes_Test_CreateTable.png)
+
+![](proof_images/Part02_Ex10_MySQLVolumes_Test_InsertData.png)
+
+![](proof_images/Part02_Ex10_MySQLVolumes_Test_ShowAllData.png)
+
+#### Stop and remove the container:
+
+![](proof_images/Part02_Ex10_MySQLVolumes_DockerComposeDown.png)
